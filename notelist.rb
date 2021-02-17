@@ -1,7 +1,6 @@
 require 'socket'
 require 'sinatra'
-
-
+require_relative 'note'
 
 server = TCPServer.new(2340)
 
@@ -13,24 +12,6 @@ socket.puts "For adding a note, type 'add'"
 socket.puts "To view your note list, type 'view'"
 
 user_input = socket.gets.chomp
-
-class NoteList
-
-    attr_reader :list
-
-  def initialize
-  @list = []
-  end
-
-  def add_note(message)
-    @list << message
-  end
-
-  def view
-    socket.puts @list
-  end
-
-end
 
 while user_input != 'quit'
   if user_input == 'list'
